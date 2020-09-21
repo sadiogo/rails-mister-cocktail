@@ -16,7 +16,10 @@ ingredients = JSON.parse(html)
 ingredients["drinks"].each { |hash| Ingredient.create(name: hash["strIngredient1"]) }
 
 12.times do
-  drink = Cocktail.create(name: Faker::Science.scientist)
+  drink = nil
+  while drink.nil?
+    drink = Cocktail.create(name: Faker::Science.scientist)
+  end
   ingredients = Ingredient.all.to_a
   rand(2..5).times do
     ingredient = ingredients.sample(1)[0]
