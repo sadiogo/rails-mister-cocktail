@@ -9,12 +9,17 @@
 require "open-uri"
 require "faker"
 require "byebug"
+require "nokogiri"
 
 url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
 html = open(url).read
 ingredients = JSON.parse(html)
 
 ingredients["drinks"].each { |hash| Ingredient.create(name: hash["strIngredient1"]) }
+
+scientist_url = "https://www.famousscientists.org/list/"
+scientist_html = open(url).read
+scientist_doc = Nokogiri::HTML(scientist_html)
 
 12.times do
   drink = Cocktail.new(name: Faker::Science.scientist)
