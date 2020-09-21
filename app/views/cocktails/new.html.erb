@@ -1,0 +1,30 @@
+<div class="container">
+  <%= simple_form_for @cocktail do |f| %>
+    <%= f.input :name %>
+    <%= f.input :ingredients, as: :select, collection: @ingredients, input_html: { class: "ingredient-selector"  }, prompt: "Choose Ingredients" %>
+    <table class="selected-ingredients w-100"></table>
+    <%= f.submit %>
+  <% end %>
+</div>
+
+<%= javascript_tag do %>
+  const selectedIngredient = (event) => {
+  const ingredientID = () => { `ingredient_${event.target.value}`; }
+    return `<tr class="selected-ingredient">
+      <% @cocktail_doses["${ingredientID()}".to_sym] = Dose.new %>
+      <td>
+        <%= link_to "#" , class: "remove-element" do %>
+          <i class="far fa-trash-alt"></i>
+        <% end %>
+      </td>
+      <td class="ingredient-name">
+        ${event.target.options[event.target.value].innerText}
+      </td>
+      <td>
+        <%= simple_form_for @cocktail_doses["${ingredientID()}".to_sym] do |dose_form| %>
+          <%= dose_form.input :description, label: false, input_html: { id: "${event.target.value}", style: "width: 100%;", placeholder: "Add description" } %>
+        <% end %>
+      </td>
+    </tr>`
+  };
+<% end %>

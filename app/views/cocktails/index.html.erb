@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="index-header d-flex justify-content-between px-2 py-4">
+    <h2>My Cocktails</h2>
+    <%= link_to new_cocktail_path, class: "btn btn-success px-3 py-2" do %>
+      <i class="fas fa-plus"></i><span>&nbsp;&nbsp; Add cocktail</span>
+    <% end %>
+  </div>
+  <div class="drink-grid row">
+    <% @cocktails.each do |cocktail| %>
+      <div class="cocktail-card card col-4">
+        <div class="card-body">
+          <h5 class="card-title"><%= cocktail.name %></h5>
+          <div class="card-text">
+            <ul class="">
+              <% cocktail.ingredients.each do |ingredient| %>
+                <li><%= ingredient.name %></li>
+              <% end %>
+            </u>
+          </div>
+          <%= link_to "Details", cocktail_path(cocktail.id), class: "card-link" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

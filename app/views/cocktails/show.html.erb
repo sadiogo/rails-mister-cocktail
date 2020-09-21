@@ -1,0 +1,21 @@
+<div class="container">
+  <table class="w-50">
+    <tr>
+      <th>Ingredient</th>
+      <th>Dose</th>
+      <th>Actions</th>
+    </tr>
+    <% @cocktail.doses.each do |dose| %>
+      <tr>
+        <td><%= dose.ingredient.name %></td>
+        <td><%= dose.description %></td>
+        <td>
+          <%= link_to cocktails_path do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= link_to "Back", cocktails_path %>
+</div>
