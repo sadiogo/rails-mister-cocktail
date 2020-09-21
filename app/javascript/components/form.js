@@ -36,8 +36,8 @@ const initIncrementSelectedIngredients = () => {
     // </tr>`;
     if (selectedIngredients.innerHTML === "") { selectedIngredients.insertAdjacentHTML("afterbegin", doseHeader); }
     const currentIngredients = [...selectedIngredients.querySelectorAll(".ingredient-name")].map(element => element.innerHTML.trim());
-    if (!currentIngredients.includes(event.target.value)) {
-      fetch("/doses/new");
+    if (!currentIngredients.includes(event.target.options[event.target.value].innerText)) {
+      // fetch("/doses/new");
       selectedIngredients.insertAdjacentHTML("beforeend", selectedIngredient(event));
       initRemoveElement();
     } else {
