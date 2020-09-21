@@ -8,6 +8,7 @@
 
 require "open-uri"
 require "faker"
+require "byebug"
 
 url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
 html = open(url).read
@@ -16,10 +17,12 @@ ingredients = JSON.parse(html)
 ingredients["drinks"].each { |hash| Ingredient.create(name: hash["strIngredient1"]) }
 
 12.times do
-  drink = nil
-  while drink.nil?
-    drink = Cocktail.create(name: Faker::Science.scientist)
+  drink = Cocktail.new(name: Faker::Science.scientist)
+  until drink.save
+    drink = Cocktail.new(name: Faker::Science.scientist)
   end
+  img_file = URI.open('https://source.unsplash.com/800x600/?cocktail')
+  drink.photo.attach(io: img_file, filename: "drink#{(rand*1000).floor}.png", content_type: 'image/png')
   ingredients = Ingredient.all.to_a
   rand(2..5).times do
     ingredient = ingredients.sample(1)[0]

@@ -1,6 +1,7 @@
 <div class="container">
   <%= simple_form_for @cocktail do |f| %>
     <%= f.input :name %>
+    <%= f.input :photo, as: :file %>
     <%= f.input :ingredients, as: :select, collection: @ingredients, input_html: { class: "ingredient-selector"  }, prompt: "Choose Ingredients" %>
     <table class="selected-ingredients w-100"></table>
     <%= f.submit %>
