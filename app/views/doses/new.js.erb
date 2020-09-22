@@ -1,1 +1,2 @@
-$('.selected-ingredients').html("<%= escape_javascript(render partial: "doses/new")) %>");
+const selectedIngredients = document.querySelector(".selected-ingredients");
+selectedIngredients.insertAdjacentHTML("beforeend", "<%= escape_javascript(render partial: "doses/new") %>");

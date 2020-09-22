@@ -1,0 +1,15 @@
+<tr class="selected-ingredient">
+  <td>
+    <%= link_to "#" , class: "remove-element" do %>
+      <i class="far fa-trash-alt"></i>
+    <% end %>
+  </td>
+  <td class="ingredient-name">
+    <%= @ingredient.name %>
+  </td>
+  <td>
+    <%= simple_form_for @dose do |dose_form| %>
+      <%= dose_form.input :description, label: false, input_html: { id: @ingredient.name, style: "width: 100%;", placeholder: "Add description" } %>
+    <% end %>
+  </td>
+</tr>

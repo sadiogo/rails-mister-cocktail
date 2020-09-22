@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   root to: "cocktails#index"
   
   resources :cocktails, only: [:index, :show, :new, :create] do
-    resources :doses, only: [:create, :update, :delete]
+    resources :doses, only: [:update, :delete]
   end
 
-  resources :doses, only: [:index, :new]
+  post "doses", to: "doses#create"
+  get "ingredients/:id/new", to: "doses#new", as: :new_dose
   
 end
