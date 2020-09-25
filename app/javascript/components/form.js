@@ -37,9 +37,14 @@ const initIncrementSelectedIngredients = () => {
     if (selectedIngredients.innerHTML === "") { selectedIngredients.insertAdjacentHTML("afterbegin", doseHeader); }
     const currentIngredients = [...selectedIngredients.querySelectorAll(".ingredient-name")].map(element => element.innerHTML.trim());
     if (!currentIngredients.includes(event.target.options[event.target.value].innerText)) {
-      // fetch("/doses/new");
-      selectedIngredients.insertAdjacentHTML("beforeend", selectedIngredient(event));
-      initRemoveElement();
+      fetch(`ingredients/${event.target.value}/new`)
+        .then(response => response.text())
+        .then((data) => {
+          selectedIngredients.insertAdjacentHTML("beforeend", data);
+          initRemoveElement();
+        });
+      // selectedIngredients.insertAdjacentHTML("beforeend", selectedIngredient(event));
+      // initRemoveElement();
     } else {
       alert("You have already select this ingredient")
     };

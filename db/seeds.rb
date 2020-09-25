@@ -17,9 +17,9 @@ ingredients = JSON.parse(html)
 
 ingredients["drinks"].each { |hash| Ingredient.create(name: hash["strIngredient1"]) }
 
-scientist_url = "https://www.famousscientists.org/list/"
-scientist_html = open(url).read
-scientist_doc = Nokogiri::HTML(scientist_html)
+# scientist_url = "https://www.famousscientists.org/list/"
+# scientist_html = open(url).read
+# scientist_doc = Nokogiri::HTML(scientist_html)
 
 12.times do
   drink = Cocktail.new(name: Faker::Science.scientist)
@@ -31,7 +31,7 @@ scientist_doc = Nokogiri::HTML(scientist_html)
   ingredients = Ingredient.all.to_a
   rand(2..5).times do
     ingredient = ingredients.sample(1)[0]
-    Dose.create({ cocktail: drink, ingredient: ingredient, description: "#{rand(1..8)} part(s)" })
+    Dose.create({ cocktail_id: drink[:id], ingredient_id: ingredient[:id], description: "#{rand(1..8)} part(s)" })
     ingredients.delete_at(ingredients.index(ingredient))
   end
 end

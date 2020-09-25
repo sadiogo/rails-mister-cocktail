@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   end
 
   post "doses", to: "doses#create"
-  get "ingredients/:id/new", to: "doses#new", as: :new_dose
+  get "cocktails/ingredients/:id/new", to: "doses#new", as: :new_dose
   
 end

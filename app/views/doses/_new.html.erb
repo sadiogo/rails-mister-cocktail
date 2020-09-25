@@ -8,8 +8,10 @@
     <%= @ingredient.name %>
   </td>
   <td>
-    <%= simple_form_for @dose do |dose_form| %>
-      <%= dose_form.input :description, label: false, input_html: { id: @ingredient.name, style: "width: 100%;", placeholder: "Add description" } %>
+    <%= simple_form_for "dose#{params[:id]}", class: "dose-form" do |dose_form| %>
+      <%= dose_form.input :description, label: false, input_html: { class: "cocktail-dose", style: "width: 100%;", placeholder: "Add description" } %>
+      <%= dose_form.hidden_field :ingredient_id, value: params[:id] %>
     <% end %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
   </td>
 </tr>
